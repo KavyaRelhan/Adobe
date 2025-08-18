@@ -1,0 +1,45 @@
+.card-section {
+    width: 100%;
+}
+.card-section h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--text-dark);
+}
+.upload-zone {
+    border: 2px dashed var(--border-color);
+    border-radius: var(--border-radius);
+    padding: 3rem;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+.upload-zone:hover { border-color: var(--primary-color); }
+.upload-zone.active {
+    border-color: var(--primary-color);
+    background-color: #eff6ff;
+}
+.upload-zone-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    pointer-events: none;
+}
+.upload-icon {
+    width: 3rem;
+    height: 3rem;
+    color: #9ca3af;
+    margin-bottom: 0.5rem;
+}
+.upload-text-main { font-weight: 600; }
+.upload-text-secondary { color: var(--text-light); }
+.link-button {
+    font-weight: 600;
+    color: var(--primary-color);
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+.link-button:hover { text-decoration: underline; }

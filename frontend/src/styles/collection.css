@@ -1,0 +1,83 @@
+Background + page layout
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: url('C:\Users\hp\Documents\Adobe-ConnectingWhatMatters\Adobe\frontend\src\utils\Gemini_Generated_Image_vsseh8vsseh8vsse.png') no-repeat center center/cover; 
+  color: white;
+}
+
+.app-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+  padding: 20px;
+}
+
+/* PDF List styles */
+.pdf-list {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.pdf-item {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+}
+
+/* Section cards */
+.sections-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.section-card {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 15px;
+  backdrop-filter: blur(10px);
+  transition: background 0.3s ease;
+}
+
+.section-card:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Sidebar */
+.sidebar {
+  width: 260px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 20px;
+  backdrop-filter: blur(10px);
+}
+
+/* Key Insights */
+.key-insights h2,
+.podcast-player h2 {
+  margin-top: 0;
+}
+
+.key-insights ul {
+  padding-left: 15px;
+}
+
+/* Podcast */
+.podcast-box {
+  height: 60px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

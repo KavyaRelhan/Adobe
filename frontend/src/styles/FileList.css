@@ -1,0 +1,28 @@
+.file-list-container { display: flex; flex-direction: column; gap: 0.75rem; }
+.file-list-item {
+    display: flex;
+    align-items: center;
+    background-color: var(--secondary-color);
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--border-color);
+}
+.file-list-item p { margin: 0; font-weight: 500; }
+.pdf-icon { width: 1.5rem; height: 1.5rem; color: #ef4444; margin-right: 0.75rem; }
+.card-section h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--text-dark);
+}
+
+.file-list-item.clickable {
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s;
+  width: 100%; /* Make button take full width */
+  text-align: left; /* Align text to the left */
+}
+.file-list-item.clickable:hover {
+  background-color: var(--secondary-hover);
+  border-color: #9ca3af;
+}

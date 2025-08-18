@@ -1,0 +1,25 @@
+.selection-popup {
+  /* Position is set by inline styles */
+  transform: translate(-50%, -120%); /* Center horizontally, position above */
+  z-index: 1100; /* Ensure it's above the PDF viewer UI */
+  transition: opacity 0.2s, transform 0.2s;
+}
+.popup-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: var(--primary-color);
+  color: var(--text-white);
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 9999px; /* Pill shape */
+  font-weight: 600;
+  font-size: 0.875rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+}
+.popup-button:hover {
+  background-color: var(--primary-hover);
+  transform: scale(1.05);
+}

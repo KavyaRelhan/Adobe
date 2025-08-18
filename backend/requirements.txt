@@ -1,0 +1,38 @@
+# requirements.txt
+
+# --- Web Framework & Server ---
+# For building and running the API
+fastapi
+uvicorn[standard]
+
+# --- PDF & Data Handling ---
+# For parsing PDF documents
+pyMuPDF
+
+# For numerical operations, a core dependency for ML tasks
+numpy
+
+# --- Machine Learning & NLP ---
+# The core library for creating text embeddings
+sentence-transformers
+
+# For the PyTorch backend required by sentence-transformers
+torch
+
+# For fast, CPU-based similarity search
+faiss-cpu
+
+# Provides the cosine_similarity function used in the relevance analyzer
+scikit-learn
+
+# A core dependency from Hugging Face for transformer models
+transformers
+
+# --- External APIs ---
+# Official Google client for calling the Gemini API
+google-generativeai
+
+# --- Utilities ---
+# For loading environment variables from a .env file during local development
+python-dotenv
+pip install python-multipart

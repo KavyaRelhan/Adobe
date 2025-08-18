@@ -1,0 +1,48 @@
+.main-content {
+    background-color: var(--card-background);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+.submit-area {
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+}
+.results-wrapper {
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+}
+
+/* for celected text button*/
+
+.selected-text-popup {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--text-dark);
+    color: var(--text-white);
+    padding: 1rem 1.5rem;
+    border-radius: 9999px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    z-index: 1000;
+    animation: slide-up 0.5s ease-out;
+}
+@keyframes slide-up {
+    from { transform: translate(-50%, 100px); opacity: 0; }
+    to { transform: translate(-50%, 0); opacity: 1; }
+}
+.selected-text-popup p {
+    margin: 0;
+    font-weight: 500;
+}
+.small-button {
+    width: auto;
+    padding: 0.5rem 1rem;
+}
