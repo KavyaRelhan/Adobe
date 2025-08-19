@@ -215,7 +215,6 @@ console.log("cvnbm,    ",selection, "bhnm., ",selectedText)
           fileUrl={viewingPdf.url}
           fileName={viewingPdf.name}
           onClose={handleClosePdf}
-          // adobeKey="8d8b62a48e7f4894937f7bf47398b160"
           onTextSelect={handleTextSelection} // Pass the state setter directly
           // onTextSelect={setSelection} // Pass the state setter directly
         />

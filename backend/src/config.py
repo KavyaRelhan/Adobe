@@ -14,7 +14,7 @@ class Settings:
     # LLM Provider Settings
     LLM_PROVIDER: str = os.getenv("LLM_PROVIDER", "gemini")
     GEMINI_API_KEY: str = os.getenv("GEMINI_API_KEY")
-    
+    GEMINI_MODEL:str= os.getenv("GEMINI_MODEL")
     # Embedding Model Settings
     EMBEDDING_MODEL_NAME: str = 'all-MiniLM-L6-v2'
     EMBEDDING_DIMENSION: int = 384

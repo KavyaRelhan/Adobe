@@ -1,0 +1,23 @@
+# Git
+.git
+.gitignore
+
+# Docker
+Dockerfile
+.dockerignore
+
+# Python virtual environment
+backend/venv
+
+# Python cache
+backend/**/__pycache__
+backend/**/*.pyc
+
+# Node.js dependencies
+frontend/node_modules
+
+# Frontend build output (we generate this inside the container)
+frontend/build
+
+# Local development environment files
+.env

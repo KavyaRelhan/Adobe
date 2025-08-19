@@ -20,7 +20,7 @@ def generate_insights_with_gemini(current_text: str, recommended_texts: list[str
     if settings.LLM_PROVIDER != 'gemini':
         raise HTTPException(status_code=501, detail="This endpoint is configured for Gemini only.")
 
-    model = genai.GenerativeModel('gemini-2.5-flash')
+    model = genai.GenerativeModel(settings.GEMINI_MODEL)
 
     # --- The Prompt is Key ---
     # We instruct the model to return a valid JSON object.

@@ -1,0 +1,38 @@
+# =================================================================
+# Stage 1: Build the React Frontend
+# =================================================================
+FROM node:18-alpine AS build-stage
+WORKDIR /app/frontend
+COPY frontend/package*.json ./
+RUN npm install
+COPY frontend/ ./
+RUN npm run build
+
+# =================================================================
+# Stage 2: Build the Python Backend and Final Image
+# =================================================================
+FROM python:3.11-slim
+
+WORKDIR /app
+
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
+# Install Python dependencies
+COPY backend/requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the pre-downloaded machine learning models
+COPY models/ ./models/
+
+# Copy the backend source code
+COPY backend/src/ ./src/
+
+# Copy the built frontend static files from the 'build-stage'
+COPY --from=build-stage /app/frontend/build ./static
+
+# Expose the port specified in the run command
+EXPOSE 8080
+
+# Command to run the application on the correct port
+CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8080"]
