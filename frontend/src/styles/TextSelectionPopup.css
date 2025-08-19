@@ -1,0 +1,182 @@
+/* Text Selection Popup Styles */
+.text-selection-popup {
+    position: fixed;
+    background: linear-gradient(135deg, #2a2d47 0%, #1e2139 100%);
+    border: 1px solid #4a4d6b;
+    border-radius: 12px;
+    padding: 16px 20px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(16px);
+    z-index: 1000;
+    max-width: 300px;
+    min-width: 200px;
+    transform: translate(-50%, -100%);
+    margin-top: -10px;
+    animation: popupSlideIn 0.2s ease-out forwards;
+}
+
+/* Arrow pointing down to selected text */
+.text-selection-popup::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 8px solid #2a2d47;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.text-selection-popup p {
+    color: #e8e9f0;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    margin: 0 0 12px 0;
+    padding: 8px 12px;
+    background: rgba(30, 33, 57, 0.6);
+    border-radius: 8px;
+    border-left: 3px solid #7c7ff2;
+    font-style: italic;
+    max-height: 60px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+.text-selection-popup button {
+    width: 100%;
+    background: linear-gradient(135deg, #7c7ff2 0%, #9b59b6 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    box-shadow: 0 2px 8px rgba(124, 127, 242, 0.3);
+}
+
+.text-selection-popup button:hover {
+    background: linear-gradient(135deg, #8b8ff7 0%, #a663c1 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(124, 127, 242, 0.4);
+}
+
+.text-selection-popup button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(124, 127, 242, 0.3);
+}
+
+/* Add analyze icon */
+.text-selection-popup button::before {
+    content: '🔍';
+    font-size: 0.8em;
+}
+
+/* Animation for popup appearance */
+@keyframes popupSlideIn {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -80%) scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -100%) scale(1);
+    }
+}
+
+/* Animation for popup disappearing */
+.text-selection-popup.fade-out {
+    animation: popupSlideOut 0.15s ease-in forwards;
+}
+
+@keyframes popupSlideOut {
+    0% {
+        opacity: 1;
+        transform: translate(-50%, -100%) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -80%) scale(0.9);
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .text-selection-popup {
+        max-width: 250px;
+        min-width: 180px;
+        padding: 14px 16px;
+        font-size: 0.85rem;
+    }
+    
+    .text-selection-popup p {
+        font-size: 0.8rem;
+        margin-bottom: 10px;
+        padding: 6px 10px;
+        max-height: 50px;
+        -webkit-line-clamp: 2;
+    }
+    
+    .text-selection-popup button {
+        padding: 8px 12px;
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .text-selection-popup {
+        max-width: 200px;
+        min-width: 160px;
+        padding: 12px 14px;
+    }
+    
+    .text-selection-popup::after {
+        border-left-width: 6px;
+        border-right-width: 6px;
+        border-top-width: 6px;
+    }
+}
+
+/* Ensure popup stays within viewport */
+.text-selection-popup.adjust-left {
+    transform: translate(-25%, -100%);
+}
+
+.text-selection-popup.adjust-right {
+    transform: translate(-75%, -100%);
+}
+
+/* Dark mode enhancements */
+.text-selection-popup {
+    /* Enhanced glassmorphism effect */
+    background: rgba(42, 45, 71, 0.95);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    
+    /* Subtle border gradient */
+    border: 1px solid;
+    border-image: linear-gradient(135deg, rgba(124, 127, 242, 0.3), rgba(155, 89, 182, 0.3)) 1;
+}
+
+/* Hover effect for the entire popup */
+.text-selection-popup:hover {
+    box-shadow: 0 16px 50px rgba(0, 0, 0, 0.5);
+    border-color: rgba(124, 127, 242, 0.4);
+}
+
+/* Focus states for accessibility */
+.text-selection-popup button:focus {
+    outline: 2px solid #7c7ff2;
+    outline-offset: 2px;
+}
