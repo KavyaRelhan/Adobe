@@ -35,10 +35,9 @@ pip install -r requirements.txt
 ```
 Create a .env file inside the backend folder:
 LLM_PROVIDER=gemini
-GEMINI_API_KEY=YOUR_GEMINI_KEY
-
+GEMINI_API_KEY=YOUR_GEMINI_KEY_FOR_LLM_FOR_INSIGHTS
 TTS_PROVIDER=google
-TTS_API=YOUR_TTS_KEY
+GOOGLE_API_KEY=YOUR_TTS_KEY_FOR_GOOGLE
 MOCK_TTS=false
 
 ###  Run Backend
@@ -52,6 +51,24 @@ cd frontend
 npm install
 npm run dev
 ```
+
+## 🐳 Docker Deployment (Optional)
+
+You can run the entire app using Docker without installing Python or Node.
+
+```bash
+docker build -t connectdocs-app .
+
+
+docker run -p 8080:8000 \
+  -e LLM_PROVIDER=gemini \
+  -e GEMINI_API_KEY=YOUR_GEMINI_KEY \
+  -e TTS_PROVIDER=google \
+  -e GOOGLE_API_KEY=YOUR_TTS_KEY_FOR_GOOGLE \
+  -e GEMINI_MODEL=gemini-2.5-flash \
+  -e MOCK_TTS=false \
+  connectdocs-app
+
 
 ---
 
