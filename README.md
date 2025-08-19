@@ -34,11 +34,17 @@ venv\Scripts\activate           # (or source venv/bin/activate on Linux/Mac)
 pip install -r requirements.txt
 ```
 Create a .env file inside the backend folder:
+```bash
 LLM_PROVIDER=gemini
-GEMINI_API_KEY=YOUR_GEMINI_KEY_FOR_LLM_FOR_INSIGHTS
+GEMINI_API_KEY=YOUR_GEMINI_KEY_FOR_LLM_FOR_INSIGHTS_GOOGLE_AI_STUDIO
 TTS_PROVIDER=google
 GOOGLE_API_KEY=YOUR_TTS_KEY_FOR_GOOGLE
 MOCK_TTS=false
+AZURE_TTS_KEY= Your Azure OpenAI API key
+AZURE_TTS_ENDPOINT= Azure OpenAI endpoint URL
+AZURE_TTS_DEPLOYMENT=(default: "tts"): Deployment name
+AZURE_TTS_API_VERSION= API version
+```
 
 ###  Run Backend
 ```bash
@@ -71,6 +77,13 @@ docker run -p 8080:8000 \
 
 
 ---
+
+OR
+
+```bash
+docker run -p 8080:8000 --env-file backend/.env connectdocs-app
+
+```
 
 ## 👥 Contributors
 
