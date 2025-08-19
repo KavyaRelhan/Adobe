@@ -148,7 +148,14 @@ console.log("cvnbm,    ",selection, "bhnm., ",selectedText)
           ) : (
             <UploadSection onFileUpload={handleFileUpload} />
           )}
-          {/* <input type="file" ref={fileInputRef} multiple className="hidden-input" accept=".pdf" onChange={(e) => handleFileUpload(e.target.files)} /> */}
+          <input
+            type="file"
+            ref={fileInputRef}
+            multiple
+            style={{ display: 'none' }}
+            accept=".pdf"
+            onChange={(e) => { handleFileUpload(e.target.files); e.target.value = ''; }}
+          />
           
           {showAnalysisForm && (
             <>
