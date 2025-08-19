@@ -46,3 +46,6 @@
     width: auto;
     padding: 0.5rem 1rem;
 }
+.hidden-input {
+    display: none;
+}

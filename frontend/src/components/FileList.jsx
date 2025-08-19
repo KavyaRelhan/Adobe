@@ -13,13 +13,17 @@ const FileList = ({ files, onAddMore, onDeleteFile, onViewPdf }) => ( // <-- Rec
             <div className="file-info">
               <AiFillFilePdf className="pdf-icon" />                <p>{fileName}</p>
             </div>
-            <button 
-                onClick={() => onDeleteFile(fileName)} 
-                className="delete-button" 
-                aria-label={`Delete ${fileName}`}
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                onDeleteFile(fileName);
+              }}  
+              className="delete-button"
+              aria-label={`Delete ${fileName}`}
             >
-                <AiOutlineDelete className="delete-icon" />
+              <AiOutlineDelete className="delete-icon" />
             </button>
+
         </div>
       ))}
     </div>
