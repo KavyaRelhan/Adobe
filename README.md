@@ -53,6 +53,8 @@ npm install
 npm run dev
 ```
 
+---
+
 ## 👥 Contributors
 
 - Tarushi
