@@ -54,6 +54,31 @@
   background: rgba(255, 255, 255, 0.1);
 }
 
+
+.pdf-file-name {
+  flex: 1;
+  color: #fff;
+  font-weight: bold;
+  font-size: large;
+}
+
+.pdf-controls {
+  display: flex;
+  gap: 10px;
+}
+
+.pdf-controls button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  color:hsl(0, 0%, 88%)
+}
+
+.close-button {
+  color: red;
+}
+
 .pdf-viewer-header h3 {
   margin: 0;
   font-size: 1.1rem;

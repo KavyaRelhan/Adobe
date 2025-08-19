@@ -9,17 +9,21 @@ const FileList = ({ files, onAddMore, onDeleteFile, onViewPdf }) => ( // <-- Rec
     <h3>Your Document Collection</h3>
     <div className="file-list-container">
       {files.map((fileName, index) => (
-        <div key={index} className="file-list-item clickable" onClick={() => onViewPdf(fileName)}>
-            <div className="file-info">
+        <div key={index} className="file-list-item clickable" >
+            <div className="file-info" onClick={() => onViewPdf(fileName)}>
               <AiFillFilePdf className="pdf-icon" />                <p>{fileName}</p>
             </div>
-            <button 
-                onClick={() => onDeleteFile(fileName)} 
-                className="delete-button" 
-                aria-label={`Delete ${fileName}`}
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                onDeleteFile(fileName);
+              }}  
+              className="delete-button"
+              aria-label={`Delete ${fileName}`}
             >
-                <AiOutlineDelete className="delete-icon" />
+              <AiOutlineDelete className="delete-icon" />
             </button>
+
         </div>
       ))}
     </div>

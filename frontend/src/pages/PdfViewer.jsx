@@ -96,7 +96,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Document, Page } from 'react-pdf';
-import { FaTimes } from 'react-icons/fa';
+import { FaTimes, FaSearchPlus, FaSearchMinus, FaUndo } from 'react-icons/fa';
 import 'react-pdf/dist/Page/AnnotationLayer.css';
 import 'react-pdf/dist/Page/TextLayer.css';
 import '../styles/PdfViewer.css';
@@ -108,6 +108,7 @@ const PdfViewer = ({ fileUrl, fileName, onClose, onTextSelect}) => {
   function onDocumentLoadSuccess({ numPages: nextNumPages }) {
     setNumPages(nextNumPages);
   }
+  const [scale, setScale] = useState(1.0);
 
   useEffect(() => {
   const handleMouseUp = () => {
@@ -139,7 +140,22 @@ const PdfViewer = ({ fileUrl, fileName, onClose, onTextSelect}) => {
     <div className="pdf-viewer-overlay"  onClick={onClose} >
       <div className="pdf-viewer-modal" onClick={(e) => e.stopPropagation()}  >
         <div className="pdf-viewer-header">
-          <button onClick={onClose} className="close-button" title="Close"><FaTimes /></button>
+          <span className="pdf-file-name">{fileName}</span>
+
+          <div className="pdf-controls">
+            <button onClick={() => setScale(scale + 0.2)} title="Zoom In">
+              <FaSearchPlus />
+            </button>
+            <button onClick={() => setScale(scale - 0.2)} disabled={scale <= 0.6} title="Zoom Out">
+              <FaSearchMinus />
+            </button>
+            <button onClick={() => setScale(1.0)} title="Reset Zoom">
+              <FaUndo />
+            </button>
+            <button onClick={onClose} className="close-button" title="Close">
+              <FaTimes />
+            </button>
+          </div>
         </div>
         <div className="pdf-viewer-content">
           <Document
@@ -154,6 +170,7 @@ const PdfViewer = ({ fileUrl, fileName, onClose, onTextSelect}) => {
                 pageNumber={index + 1}
                 renderAnnotationLayer={false}
                 renderTextLayer={true}
+                scale={scale}
               />
             ))}
           </Document>
