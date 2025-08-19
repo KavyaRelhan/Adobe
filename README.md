@@ -58,6 +58,16 @@ npm run dev
 - Tarushi
 - Kavya
 
+---
+
+### 🏆 Hackathon Context
+
+This project was built as part of the **Adobe India Hackathon 2025 – Grand Finale, Connecting the Dots Challenge** under the theme:
+
+> _From Brains to Experience – Make It Real_
+
+---
+
 ## ✅ Usage Flow
 
 1. Upload PDFs using drag & drop or click-to-upload
@@ -69,6 +79,8 @@ npm run dev
 4. Optionally upload more PDFs or delete existing ones
 
 5. Generate again for updated insights
+
+---
 
 ## ✅ Future Improvements (Optional Add-on section)
 
