@@ -60,7 +60,7 @@ npm run dev
 - Tarushi
 - Kavya
 
----
+
 
 ### 🏆 Hackathon Context
 
