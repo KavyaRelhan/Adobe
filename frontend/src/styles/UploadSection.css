@@ -1,70 +1,215 @@
-
+/* UploadSection.css */
 .card-section {
-    width: 85%;
-    background: var(--card-background);
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow);
-    border: 1px solid var(--border-color);
-    padding: 2rem 2.5rem;
-    margin-bottom: 2rem;
-    backdrop-filter: blur(16px);
-    transition: background 0.3s, box-shadow 0.3s;
+  margin: 30px auto;
+  max-width: 800px;
+  padding: 0 20px;
 }
+
 .card-section h2 {
-    font-size: 1.6rem;
-    font-weight: 800;
-    color: var(--primary-color);
-    margin-bottom: 1.5rem;
-    letter-spacing: -1px;
+  font-size: 2rem;
+  font-weight: 600;
+  color: #f8fafc;
+  margin-bottom: 25px;
+  text-align: center;
+  letter-spacing: -0.02em;
 }
+
 .upload-zone {
-    border: 2.5px dashed var(--primary-color);
-    border-radius: var(--border-radius);
-    padding: 3rem 2rem;
-    text-align: center;
-    cursor: pointer;
-    background: rgba(255,255,255,0.5);
-    transition: background 0.3s, border-color 0.3s;
-    margin-bottom: 1.5rem;
-    box-shadow: 0 2px 12px rgba(244,67,54,0.04);
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.4) 0%, rgba(51, 65, 85, 0.3) 100%);
+  backdrop-filter: blur(20px);
+  border: 2px dashed rgba(148, 163, 184, 0.3);
+  border-radius: 16px;
+  padding: 60px 40px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.upload-zone:hover, .upload-zone.active {
-    border-color: var(--accent-color);
-    background: rgba(244,67,54,0.06);
+
+/* Subtle background glow effect */
+.upload-zone::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.05) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
 }
+
+.upload-zone:hover::before {
+  opacity: 1;
+}
+
+.upload-zone:hover {
+  border-color: rgba(59, 130, 246, 0.5);
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.5) 0%, rgba(51, 65, 85, 0.4) 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.upload-zone.active {
+  border-color: #3b82f6;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(30, 41, 59, 0.6) 100%);
+  transform: scale(1.02);
+  box-shadow: 0 15px 40px rgba(59, 130, 246, 0.2);
+}
+
+.upload-zone.active::before {
+  opacity: 1;
+  background: radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+}
+
 .upload-zone-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  z-index: 1;
+  position: relative;
 }
+
 .upload-icon {
-    width: 3.2rem;
-    height: 3.2rem;
-    color: var(--primary-color);
-    margin-bottom: 0.7rem;
-    filter: drop-shadow(0 2px 8px rgba(244,67,54,0.10));
+  width: 64px;
+  height: 64px;
+  color: rgba(148, 163, 184, 0.7);
+  transition: all 0.3s ease;
 }
+
+.upload-zone:hover .upload-icon {
+  color: #3b82f6;
+  transform: scale(1.1);
+}
+
+.upload-zone.active .upload-icon {
+  color: #60a5fa;
+  transform: scale(1.15);
+}
+
 .upload-text-main {
-    font-weight: 700;
-    color: var(--text-dark);
-    font-size: 1.1rem;
-    text-align: center;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #f1f5f9;
+  margin-bottom: 4px;
+  transition: color 0.3s ease;
 }
+
+.upload-zone:hover .upload-text-main {
+  color: #ffffff;
+}
+
 .upload-text-secondary {
-    color: var(--text-light);
-    font-size: 0.98rem;
+  font-size: 1rem;
+  color: rgba(148, 163, 184, 0.8);
+  font-weight: 400;
 }
+
 .link-button {
-    font-weight: 700;
-    color: var(--primary-color);
-    background: var(--card-background);
-    border: none;
-    padding: 0;
-    cursor: pointer;
-    text-decoration: underline;
-    font-size: 1rem;
+  background: none;
+  border: none;
+  color: #3b82f6;
+  font-size: inherit;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: all 0.2s ease;
+  padding: 0;
 }
+
 .link-button:hover {
-    color: var(--accent-color);
+  color: #60a5fa;
+  text-decoration: none;
+}
+
+.link-button:active {
+  color: #2563eb;
+}
+
+.hidden-input {
+  display: none;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .card-section {
+    padding: 0 15px;
+    margin: 20px auto;
+  }
+  
+  .card-section h2 {
+    font-size: 1.75rem;
+    margin-bottom: 20px;
+  }
+  
+  .upload-zone {
+    padding: 40px 20px;
+    min-height: 160px;
+  }
+  
+  .upload-icon {
+    width: 56px;
+    height: 56px;
+  }
+  
+  .upload-text-main {
+    font-size: 1.1rem;
+  }
+  
+  .upload-text-secondary {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .card-section h2 {
+    font-size: 1.5rem;
+  }
+  
+  .upload-zone {
+    padding: 30px 15px;
+    min-height: 140px;
+  }
+  
+  .upload-icon {
+    width: 48px;
+    height: 48px;
+  }
+  
+  .upload-text-main {
+    font-size: 1rem;
+  }
+  
+  .upload-text-secondary {
+    font-size: 0.85rem;
+    text-align: center;
+    line-height: 1.4;
+  }
+  
+  .upload-zone-content {
+    gap: 12px;
+  }
+}
+
+/* Accessibility improvements */
+.upload-zone:focus-within {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .upload-zone,
+  .upload-icon,
+  .upload-text-main,
+  .link-button {
+    transition: none;
+  }
 }

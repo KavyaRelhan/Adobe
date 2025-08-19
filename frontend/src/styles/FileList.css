@@ -1,66 +1,452 @@
+/* FileList.css */
 
-.file-list-container {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  overflow-x: hidden;
+/* Base Variables - Consistent with space theme */
+:root {
+  --primary-bg: #0a0e1a;
+  --secondary-bg: #1a1f2e;
+  --card-bg: rgba(26, 31, 46, 0.8);
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --primary-text: #ffffff;
+  --secondary-text: #b8c5d6;
+  --accent-text: #64b5f6;
+  --primary-accent: #4fc3f7;
+  --secondary-accent: #81c784;
+  --danger-color: #f44336;
+  --danger-hover: #e53935;
+  --pdf-color: #e53e3e;
+  --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --gradient-file: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+  --gradient-upload: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+  --box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  --backdrop-filter: blur(12px);
+  --border-radius-lg: 20px;
+  --border-radius-md: 16px;
+  --border-radius-sm: 12px;
 }
-.file-list-item {
-  display: flex;
-  align-items: center;
-  background: rgb(122 86 86 / 92%);
-  padding: 1rem 1.2rem;
-  border-radius: var(--border-radius);
-  border: 1.5px solid var(--border-color);
-  box-shadow: var(--shadow);
-  transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
-}
-.file-list-item p {
-  margin: 0;
-  font-weight: 700;
-  color: var(--text-light); /* Changed to muted grey */
-  max-width: 620px;
+
+/* Card Section - Main Container */
+.card-section {
+  background: var(--glass-bg);
+  backdrop-filter: var(--backdrop-filter);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--border-radius-lg);
+  padding: 2.5rem;
+  box-shadow: var(--box-shadow);
+  transition: all 0.4s ease;
+  position: relative;
   overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  animation: slideInFromLeft 0.8s ease-out;
 }
-.pdf-icon {
-  width: 1.7rem;
-  height: 1.7rem;
-  color: var(--primary-color);
-  margin-right: 1rem;
-  filter: drop-shadow(0 2px 8px rgba(244,67,54,0.10));
+
+@keyframes slideInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
+
+.card-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.8s ease;
+  z-index: 1;
+}
+
+.card-section:hover::before {
+  left: 100%;
+}
+
+.card-section:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 60px rgba(79, 195, 247, 0.3);
+  border-color: var(--primary-accent);
+}
+
+/* Title Styling */
 .card-section h3 {
-  font-size: 1.3rem;
-  font-weight: 800;
-  margin-bottom: 1.2rem;
-  color: var(--text-dark);
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--primary-text);
+  margin-bottom: 2rem;
+  text-align: center;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+  z-index: 2;
 }
+
+.card-section h3::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: var(--gradient-primary);
+  border-radius: 2px;
+}
+
+/* File List Container */
+.file-list-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+  position: relative;
+  z-index: 2;
+}
+
+/* Individual File Item */
+.file-list-item {
+  background: var(--card-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--border-radius-md);
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.file-list-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--gradient-file);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+  border-radius: var(--border-radius-md) var(--border-radius-md) 0 0;
+}
+
+.file-list-item:hover::before {
+  transform: scaleX(1);
+}
+
+.file-list-item:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(229, 62, 62, 0.25);
+  border-color: var(--pdf-color);
+  background: rgba(26, 31, 46, 0.9);
+}
+
+/* Clickable cursor for PDF viewing */
 .file-list-item.clickable {
   cursor: pointer;
-  width: 40%;
-  text-align: left;
+}
+
+.file-list-item.clickable:active {
+  transform: translateY(-5px) scale(0.98);
+}
+
+/* File Info Section */
+.file-info {
+  display: flex;
   align-items: center;
+  gap: 1rem;
+  flex: 1;
+  min-width: 0; /* Allows text to truncate */
 }
-.file-list-item.clickable:hover {
-  background: rgba(244,67,54,0.07);
-  border-color: var(--primary-color);
-  box-shadow: 0 8px 32px 0 rgba(244,67,54,0.10);
+
+
+/* PDF Icon */
+.pdf-icon {
+  font-size: 2.5rem;
+  color: var(--pdf-color);
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 10px rgba(229, 62, 62, 0.5));
+  transition: all 0.3s ease;
 }
+
+.file-list-item:hover .pdf-icon {
+  transform: scale(1.1) rotate(5deg);
+  filter: drop-shadow(0 0 15px rgba(229, 62, 62, 0.8));
+}
+
+/* File Name */
+.file-info p {
+  color: var(--primary-text);
+  font-size: 0.95rem;
+  font-weight: 500;
+  margin: 0;
+  line-height: 1.4;
+  word-break: break-word;
+  transition: color 0.3s ease;
+}
+
+.file-list-item:hover .file-info p {
+  color: var(--accent-text);
+}
+
+/* Delete Button */
 .delete-button {
-  background: none;
-  border: none;
-  margin-left: auto;
+  background: rgba(244, 67, 54, 0.1);
+  border: 1px solid rgba(244, 67, 54, 0.3);
+  border-radius: var(--border-radius-sm);
+  padding: 0.75rem;
   cursor: pointer;
-  padding: 0.3rem 0.7rem;
-  border-radius: 9999px;
-  transition: background 0.2s;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
 }
+
+.delete-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(244, 67, 54, 0.2), transparent);
+  transition: left 0.4s ease;
+}
+
+.delete-button:hover::before {
+  left: 100%;
+}
+
 .delete-button:hover {
-  background: rgba(244,67,54,0.10);
+  background: rgba(244, 67, 54, 0.2);
+  border-color: var(--danger-color);
+  transform: scale(1.1);
+  box-shadow: 0 5px 20px rgba(244, 67, 54, 0.4);
 }
+
+.delete-button:active {
+  transform: scale(0.95);
+}
+
+/* Delete Icon */
 .delete-icon {
-  color: var(--primary-color);
   font-size: 1.2rem;
+  color: var(--danger-color);
+  transition: all 0.3s ease;
+}
+
+.delete-button:hover .delete-icon {
+  color: var(--danger-hover);
+  transform: rotate(10deg);
+}
+
+/* Upload More Button */
+.button {
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: var(--border-radius-sm);
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  position: relative;
+  overflow: hidden;
+  z-index: 2;
+}
+
+.button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.6s ease;
+  z-index: -1;
+}
+
+.button:hover::before {
+  left: 100%;
+}
+
+.secondary-button {
+  background: var(--gradient-upload);
+  color: white;
+  border: 1px solid rgba(132, 250, 176, 0.3);
+  box-shadow: 0 4px 15px rgba(132, 250, 176, 0.3);
+  width: 100%;
+  font-size: 1rem;
+  padding: 1rem 2rem;
+}
+
+.secondary-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(132, 250, 176, 0.4);
+  background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+}
+
+.secondary-button:active {
+  transform: translateY(-1px);
+}
+
+/* Empty State */
+.file-list-container:empty::after {
+  content: 'No files uploaded yet. Click "Upload More Files" to get started.';
+  display: block;
+  text-align: center;
+  color: var(--secondary-text);
+  font-style: italic;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px dashed var(--glass-border);
+  border-radius: var(--border-radius-md);
+  margin-bottom: 2rem;
+}
+
+/* Loading States */
+.file-list-item.loading {
+  background: linear-gradient(90deg, 
+    var(--card-bg) 0%, 
+    rgba(255, 255, 255, 0.1) 50%, 
+    var(--card-bg) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmerLoad 2s infinite;
+}
+
+@keyframes shimmerLoad {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* File Count Badge */
+.card-section::after {
+  content: attr(data-file-count) ' files';
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: var(--gradient-primary);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  z-index: 3;
+  opacity: 0;
+  animation: fadeInBadge 0.5s ease-out 1s forwards;
+}
+
+@keyframes fadeInBadge {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .card-section {
+    padding: 2rem 1.5rem;
+  }
+  
+  .file-list-container {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .file-list-item {
+    padding: 1.25rem;
+  }
+  
+  .pdf-icon {
+    font-size: 2rem;
+  }
+  
+  .file-info p {
+    font-size: 0.9rem;
+  }
+  
+  .card-section h3 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .card-section {
+    padding: 1.5rem 1rem;
+    border-radius: var(--border-radius-md);
+  }
+  
+  .file-list-item {
+    padding: 1rem;
+    flex-direction: column;
+    gap: 0.75rem;
+    text-align: center;
+  }
+  
+  .file-info {
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+  }
+  
+  .delete-button {
+    width: 100%;
+    padding: 0.5rem;
+  }
+  
+  .secondary-button {
+    padding: 0.875rem 1.5rem;
+    font-size: 0.95rem;
+  }
+}
+
+/* Accessibility Improvements */
+.file-list-item:focus-within {
+  outline: 2px solid var(--primary-accent);
+  outline-offset: 2px;
+}
+
+.delete-button:focus {
+  outline: 2px solid var(--danger-color);
+  outline-offset: 2px;
+}
+
+.button:focus {
+  outline: 2px solid var(--primary-accent);
+  outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .file-list-item {
+    border-width: 2px;
+  }
+  
+  .delete-button {
+    border-width: 2px;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

@@ -11,6 +11,7 @@ import useSession from "../hooks/useSession";
 import  apiService from "../services/api";
 import Header from '../components/Header';
 import "../styles/CreateCollection.css";
+import { FaMagic } from "react-icons/fa";
 
 const API_BASE_URL = 'http://127.0.0.1:8000';
 
@@ -26,6 +27,7 @@ const CreateCollection = () => {
   const [selection,   setSelection] = useState(null); // State for the selection popup
   const [currentQuery, setCurrentQuery] = useState('');
   const [selectedText, setSelectedText] = useState('');
+  const [popupPos, setPopupPos] = useState(null);
   const [isScriptReady, setIsScriptReady] = useState('');
   const [isScriptLoading, setIsScriptLoading] = useState('');
 
@@ -136,12 +138,6 @@ console.log("cvnbm,    ",selection, "bhnm., ",selectedText)
     }
   };
 
-  const handleTextSelection = () => {
-    const text = window.getSelection().toString().trim();
-    if (text) {
-        setSelectedText(text);
-    }
-  };
 
   useEffect(() => {
     if (results) {
@@ -153,6 +149,17 @@ console.log("cvnbm,    ",selection, "bhnm., ",selectedText)
     return <Loader />;
   }
   
+  const handleTextSelection = (text, pos) => {
+    setSelectedText(text);
+    setPopupPos(pos);
+    console.log("📌 Selected text:", text, "at", pos);
+  };
+
+  const handleClosePopup = () => {
+    setSelectedText('');
+    setPopupPos(null);
+  };
+
   console.log("[CreateCollection] Step 5: Re-rendering. Current selection state:", selection);
 
   const showAnalysisForm = uploadedFiles.length > 0;
@@ -199,6 +206,7 @@ console.log("cvnbm,    ",selection, "bhnm., ",selectedText)
               />
             </div>
           )}
+
         </main>
       </div>
 
@@ -207,22 +215,50 @@ console.log("cvnbm,    ",selection, "bhnm., ",selectedText)
           fileUrl={viewingPdf.url}
           fileName={viewingPdf.name}
           onClose={handleClosePdf}
-          adobeKey="8d8b62a48e7f4894937f7bf47398b160"
+          // adobeKey="8d8b62a48e7f4894937f7bf47398b160"
+          onTextSelect={handleTextSelection} // Pass the state setter directly
           // onTextSelect={setSelection} // Pass the state setter directly
-          onTextSelect={setSelection} // Pass the state setter directly
         />
       )}
-      
-      {selection && (
-        <SelectionPopup 
-          top={selection.top} 
-          left={selection.left} 
-          onAnalyze={() => {
-              handleAnalyzeSelectedText(selection.text);
-              setSelection(null);
-          }} 
-        />
+      {popupPos && selectedText && (
+        <div
+          style={{
+            position: "fixed",
+            top: popupPos.y,
+            left: popupPos.x,
+            transform: "translate(-50%, -100%)",
+            background: "white",
+            border: "1px solid #ccc",
+            borderRadius: "8px",
+            padding: "6px 10px",
+            boxShadow: "0 2px 6px rgba(0,0,0,0.2)",
+            zIndex: 9999,
+          }}
+        >
+          <p style={{ margin: 0, fontSize: "14px" }}>{selectedText}</p>
+          <button
+            onClick={() => {
+              console.log("Analyze:", selectedText);
+              handleAnalyzeSelectedText(selectedText);
+              setSelectedText("");                     
+              setPopupPos(null);
+              setViewingPdf(null);  
+            }}
+            style={{
+              marginTop: "4px",
+              padding: "4px 8px",
+              background: "#007bff",
+              color: "white",
+              border: "none",
+              borderRadius: "4px",
+              cursor: "pointer",
+            }}
+          >
+            Analyze
+          </button>
+        </div>
       )}
+
     </>
   );
 };

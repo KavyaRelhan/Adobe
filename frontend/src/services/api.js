@@ -52,6 +52,19 @@ const apiService = {
     }
   },
 
+  async processCollectionWithText(sessionId, selectedText) {
+    const formData = new FormData();
+    formData.append('session_id', sessionId);
+    formData.append('selected_text', selectedText); // Use the correct key for the backend
+    try {
+        const response = await axios.post(`${API_BASE_URL}/collection/process`, formData);
+        return response.data;
+    } catch (error) {
+        const errorMsg = error.response?.data?.detail || error.message || 'Analysis failed';
+        throw new Error(errorMsg);
+    }
+  },
+
   async generateScript(sessionId, query, insights, sections) {
         const formData = new FormData();
         formData.append('session_id', sessionId);

@@ -77,7 +77,7 @@ async def delete_file_from_session(
         )
 
     # Return the updated list of remaining files
-    remaining_files = [f.name for f in session_upload_dir.iterdir() if f.is_file()]
+    remaining_files = [f.name for f in session_upload_dir.iterdir()  if f.is_file() and f.suffix.lower() == '.pdf']
     return {
         "message": f"Successfully deleted '{filename}'.",
         "uploaded_files": remaining_files

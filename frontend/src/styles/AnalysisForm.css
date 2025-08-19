@@ -1,4 +1,3 @@
-
 .card-section {
     background: var(--card-background);
     border-radius: var(--border-radius);
@@ -13,7 +12,7 @@
 .card-section h2 {
     font-size: 1.6rem;
     font-weight: 800;
-    color: var(--text-dark);
+    color: #8b8db8; /* Changed to purple-gray */
     margin-bottom: 1rem;
     letter-spacing: -0.6px;
 }
@@ -25,7 +24,7 @@
     display: block;
     font-weight: 700;
     margin-bottom: 0.5rem;
-    color: var(--text-dark);
+    color: #b8bac8; /* Changed to light purple-gray */
     letter-spacing: 0.01em;
 }
 .form-group input, .form-group textarea {
@@ -55,7 +54,7 @@
 }
 
 .card-section p, .card-section label, .form-group p {
-    color: var(--text-dark);
+    color: #8b8db8; /* Changed to purple-gray */
     font-size: 0.98rem;
     margin: 0;
 }
