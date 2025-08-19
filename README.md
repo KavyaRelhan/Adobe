@@ -80,7 +80,7 @@ docker run -p 8080:8000 \
 
 OR
 
-```bash
+
 docker run -p 8080:8000 --env-file backend/.env connectdocs-app
 
 ```
