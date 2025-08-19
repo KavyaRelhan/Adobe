@@ -57,8 +57,9 @@ npm run dev
 
 ## 👥 Contributors
 
-- Tarushi
+
 - Kavya
+- Tarushi
 
 
 
