@@ -35,4 +35,4 @@ google-generativeai
 # --- Utilities ---
 # For loading environment variables from a .env file during local development
 python-dotenv
-pip install python-multipart
+python-multipart
