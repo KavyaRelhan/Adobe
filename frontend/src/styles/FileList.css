@@ -1,28 +1,66 @@
-.file-list-container { display: flex; flex-direction: column; gap: 0.75rem; }
-.file-list-item {
-    display: flex;
-    align-items: center;
-    background-color: var(--secondary-color);
-    padding: 0.75rem;
-    border-radius: 0.5rem;
-    border: 1px solid var(--border-color);
-}
-.file-list-item p { margin: 0; font-weight: 500; }
-.pdf-icon { width: 1.5rem; height: 1.5rem; color: #ef4444; margin-right: 0.75rem; }
-.card-section h3 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    color: var(--text-dark);
-}
 
+.file-list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  overflow-x: hidden;
+}
+.file-list-item {
+  display: flex;
+  align-items: center;
+  background: rgb(122 86 86 / 92%);
+  padding: 1rem 1.2rem;
+  border-radius: var(--border-radius);
+  border: 1.5px solid var(--border-color);
+  box-shadow: var(--shadow);
+  transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+.file-list-item p {
+  margin: 0;
+  font-weight: 700;
+  color: var(--text-light); /* Changed to muted grey */
+  max-width: 620px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.pdf-icon {
+  width: 1.7rem;
+  height: 1.7rem;
+  color: var(--primary-color);
+  margin-right: 1rem;
+  filter: drop-shadow(0 2px 8px rgba(244,67,54,0.10));
+}
+.card-section h3 {
+  font-size: 1.3rem;
+  font-weight: 800;
+  margin-bottom: 1.2rem;
+  color: var(--text-dark);
+}
 .file-list-item.clickable {
   cursor: pointer;
-  transition: background-color 0.2s, border-color 0.2s;
-  width: 100%; /* Make button take full width */
-  text-align: left; /* Align text to the left */
+  width: 40%;
+  text-align: left;
+  align-items: center;
 }
 .file-list-item.clickable:hover {
-  background-color: var(--secondary-hover);
-  border-color: #9ca3af;
+  background: rgba(244,67,54,0.07);
+  border-color: var(--primary-color);
+  box-shadow: 0 8px 32px 0 rgba(244,67,54,0.10);
+}
+.delete-button {
+  background: none;
+  border: none;
+  margin-left: auto;
+  cursor: pointer;
+  padding: 0.3rem 0.7rem;
+  border-radius: 9999px;
+  transition: background 0.2s;
+}
+.delete-button:hover {
+  background: rgba(244,67,54,0.10);
+}
+.delete-icon {
+  color: var(--primary-color);
+  font-size: 1.2rem;
 }

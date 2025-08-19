@@ -1,24 +1,36 @@
+
 .card-section {
-    width: 100%;
+    width: 85%;
+    background: var(--card-background);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
+    padding: 2rem 2.5rem;
+    margin-bottom: 2rem;
+    backdrop-filter: blur(16px);
+    transition: background 0.3s, box-shadow 0.3s;
 }
 .card-section h2 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    color: var(--text-dark);
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    letter-spacing: -1px;
 }
 .upload-zone {
-    border: 2px dashed var(--border-color);
+    border: 2.5px dashed var(--primary-color);
     border-radius: var(--border-radius);
-    padding: 3rem;
+    padding: 3rem 2rem;
     text-align: center;
     cursor: pointer;
-    transition: background-color 0.3s, border-color 0.3s;
+    background: rgba(255,255,255,0.5);
+    transition: background 0.3s, border-color 0.3s;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 12px rgba(244,67,54,0.04);
 }
-.upload-zone:hover { border-color: var(--primary-color); }
-.upload-zone.active {
-    border-color: var(--primary-color);
-    background-color: #eff6ff;
+.upload-zone:hover, .upload-zone.active {
+    border-color: var(--accent-color);
+    background: rgba(244,67,54,0.06);
 }
 .upload-zone-content {
     display: flex;
@@ -27,19 +39,32 @@
     pointer-events: none;
 }
 .upload-icon {
-    width: 3rem;
-    height: 3rem;
-    color: #9ca3af;
-    margin-bottom: 0.5rem;
-}
-.upload-text-main { font-weight: 600; }
-.upload-text-secondary { color: var(--text-light); }
-.link-button {
-    font-weight: 600;
+    width: 3.2rem;
+    height: 3.2rem;
     color: var(--primary-color);
-    background: none;
+    margin-bottom: 0.7rem;
+    filter: drop-shadow(0 2px 8px rgba(244,67,54,0.10));
+}
+.upload-text-main {
+    font-weight: 700;
+    color: var(--text-dark);
+    font-size: 1.1rem;
+    text-align: center;
+}
+.upload-text-secondary {
+    color: var(--text-light);
+    font-size: 0.98rem;
+}
+.link-button {
+    font-weight: 700;
+    color: var(--primary-color);
+    background: var(--card-background);
     border: none;
     padding: 0;
     cursor: pointer;
+    text-decoration: underline;
+    font-size: 1rem;
 }
-.link-button:hover { text-decoration: underline; }
+.link-button:hover {
+    color: var(--accent-color);
+}

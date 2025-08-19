@@ -1,0 +1,35 @@
+{
+  "themeName": "Adobe Modern Glass",
+  "colors": {
+    "primary": "#f44336",
+    "accent": "#ff8a80",
+    "background": "#fbfbfc",
+    "cardBackground": "rgba(255,255,255,0.92)",
+    "cardBorder": "rgba(0,0,0,0.06)",
+    "textDark": "#0f1724",
+    "textLight": "#475569",
+    "link": "#f44336",
+    "hover": "#d32f2f",
+    "error": "#d32f2f",
+    "success": "#10b981",
+    "warning": "#f59e0b"
+  },
+  "typography": {
+    "fontFamily": "'Raleway', sans-serif",
+    "h1": { "fontSize": "2.5rem", "fontWeight": "700" },
+    "h2": { "fontSize": "2rem", "fontWeight": "700" },
+    "h3": { "fontSize": "1.5rem", "fontWeight": "700" },
+    "body": { "fontSize": "1rem", "fontWeight": "400" },
+    "small": { "fontSize": "0.875rem", "fontWeight": "400" }
+  },
+  "effects": {
+    "shadow": "0 10px 25px rgba(0,0,0,0.2)",
+    "backdropFilter": "blur(16px)",
+    "transition": "all 0.2s ease-in-out"
+  },
+  "spacing": {
+    "padding": "1.5rem",
+    "margin": "1.5rem",
+    "borderRadius": "16px"
+  }
+}

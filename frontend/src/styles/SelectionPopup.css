@@ -9,7 +9,7 @@
   align-items: center;
   gap: 0.5rem;
   background-color: var(--primary-color);
-  color: var(--text-white);
+  color: var(--text-dark);
   border: none;
   padding: 0.6rem 1rem;
   border-radius: 9999px; /* Pill shape */

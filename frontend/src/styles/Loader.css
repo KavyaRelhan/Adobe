@@ -1,17 +1,27 @@
+
 .loader-container {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 0.75rem;
-    margin-top: 1rem;
+    gap: 1rem;
+    margin-top: 2rem;
     color: var(--text-light);
+    background: var(--card-background);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
+    padding: 1.2rem 2rem;
+    backdrop-filter: blur(10px);
 }
 .spinner {
-    width: 1.25rem;
-    height: 1.25rem;
-    border: 3px solid rgba(59, 130, 246, 0.3);
-    border-top-color: var(--primary-color);
+    width: 1.75rem;
+    height: 1.75rem;
+    border: 3px solid rgba(244,67,54,0.18);
+    border-top-color: var(--accent-color);
     border-radius: 50%;
     animation: spin 1s linear infinite;
+    box-shadow: 0 2px 8px rgba(244,67,54,0.12);
 }
-@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}

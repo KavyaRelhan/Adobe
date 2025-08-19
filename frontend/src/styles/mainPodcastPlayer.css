@@ -1,10 +1,15 @@
+
+/* --- Adobe-style Podcast Player --- */
 .main-podcast-card {
-  background: #fff;
-  border-radius: 16px;
-  padding: 20px;
-  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);
+  background: var(--card-background);
+  border-radius: var(--border-radius);
+  padding: 2.2rem 2rem 1.5rem 2rem;
+  box-shadow: var(--shadow);
   display: inline-block;
   text-align: center;
+  border: 1.5px solid var(--border-color);
+  backdrop-filter: blur(12px);
+  color: var(--text-dark);
 }
 
 .disk-wrapper {
@@ -19,6 +24,8 @@
   background-size: cover;
   background-position: center;
   margin: auto;
+  box-shadow: 0 2px 12px rgba(244,67,54,0.10);
+  border: 4px solid var(--primary-color);
 }
 
 .rotate {
@@ -30,36 +37,135 @@
   bottom: -15px;
   left: 50%;
   transform: translateX(-50%);
-  background: #007bff;
-  color: white;
+  background: var(--primary-color);
+  color: var(--text-white);
   border: none;
   border-radius: 50%;
-  padding: 12px;
+  padding: 14px;
   cursor: pointer;
+  box-shadow: 0 2px 8px rgba(244,67,54,0.10);
+  font-size: 1.2rem;
+  transition: background 0.2s;
+}
+.play-button:hover {
+  background: var(--accent-color);
 }
 
 .podcast-title {
-  margin-top: 20px;
-  font-weight: bold;
-  font-size: 1.1rem;
+  margin-top: 22px;
+  font-weight: 800;
+  font-size: 1.18rem;
+  color: var(--primary-color);
 }
 
 .waveform {
   display: flex;
   justify-content: center;
-  margin-top: 15px;
+  margin-top: 18px;
 }
 
 .bar {
   width: 4px;
   height: 20px;
-  background: #007bff;
+  background: var(--primary-color);
   margin: 0 2px;
   animation: wave 1s infinite ease-in-out;
+  border-radius: 2px;
 }
-
 .bar:nth-child(even) {
   animation-delay: 0.2s;
+  background: var(--accent-color);
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes wave {
+  0%, 100% {
+    height: 20px;
+  }
+  50% {
+    height: 40px;
+  }
+}
+
+.main-podcast-card {
+  background: var(--card-background);
+  border-radius: var(--border-radius);
+  padding: 2.2rem 2rem 1.5rem 2rem;
+  box-shadow: var(--shadow);
+  display: inline-block;
+  text-align: center;
+  border: 1.5px solid var(--border-color);
+  backdrop-filter: blur(12px);
+}
+
+.disk-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.disk {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+  margin: auto;
+  box-shadow: 0 2px 12px rgba(244,67,54,0.10);
+  border: 4px solid var(--primary-color);
+}
+
+.rotate {
+  animation: spin 4s linear infinite;
+}
+
+.play-button {
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--primary-color);
+  color: var(--text-white);
+  border: none;
+  border-radius: 50%;
+  padding: 14px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(244,67,54,0.10);
+  font-size: 1.2rem;
+  transition: background 0.2s;
+}
+.play-button:hover {
+  background: var(--accent-color);
+}
+
+.podcast-title {
+  margin-top: 22px;
+  font-weight: 800;
+  font-size: 1.18rem;
+  color: var(--primary-color);
+}
+
+.waveform {
+  display: flex;
+  justify-content: center;
+  margin-top: 18px;
+}
+
+.bar {
+  width: 4px;
+  height: 20px;
+  background: var(--primary-color);
+  margin: 0 2px;
+  animation: wave 1s infinite ease-in-out;
+  border-radius: 2px;
+}
+.bar:nth-child(even) {
+  animation-delay: 0.2s;
+  background: var(--accent-color);
 }
 
 @keyframes spin {
