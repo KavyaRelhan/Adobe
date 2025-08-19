@@ -228,6 +228,13 @@ console.log("cvnbm,    ",selection, "bhnm., ",selectedText)
           setSelectedText('');
           setPopupPos(null);
           setViewingPdf(null);
+
+          setTimeout(() => {
+            const resultsSection = document.getElementById('results-section-container');
+            if (resultsSection) {
+              resultsSection.scrollIntoView({ behavior: 'smooth' });
+            }
+          }, 200);
         }}
       />
 

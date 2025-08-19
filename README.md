@@ -58,7 +58,7 @@ npm install
 npm run dev
 ```
 
-## 🐳 Docker Deployment (Optional)
+## 🐳 Docker Deployment 
 
 You can run the entire app using Docker without installing Python or Node.
 
