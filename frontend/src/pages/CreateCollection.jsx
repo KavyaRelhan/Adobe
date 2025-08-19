@@ -239,6 +239,8 @@ const CreateCollection = () => {
   const [selection,   setSelection] = useState(null); // State for the selection popup
   const [currentQuery, setCurrentQuery] = useState('');
   const [selectedText, setSelectedText] = useState('');
+  const [isScriptReady, setIsScriptReady] = useState('');
+  const [isScriptLoading, setIsScriptLoading] = useState('');
 
 console.log("cvnbm,    ",selection, "bhnm., ",selectedText)
 
@@ -253,6 +255,24 @@ console.log("cvnbm,    ",selection, "bhnm., ",selectedText)
     document.body.style.overflow = viewingPdf ? 'hidden' : 'auto';
     return () => { document.body.style.overflow = 'auto'; };
   }, [viewingPdf]);
+
+    useEffect(() => {
+    if (results && sessionId && currentQuery) {
+      const generate = async () => {
+        setIsScriptReady(false);
+        setIsScriptLoading(true);
+        try {
+          await apiService.generateScript(sessionId, currentQuery, results.insights, results.relevant_sections);
+          setIsScriptReady(true);
+        } catch (error) {
+          console.error("Failed to auto-generate podcast script:", error);
+        } finally {
+          setIsScriptLoading(false);
+        }
+      };
+      generate();
+    }
+  }, [results, sessionId, currentQuery]);
 
   const handleFileUpload = useCallback(async (filesToUpload) => {
     if (!sessionId) return;
@@ -384,6 +404,8 @@ console.log("cvnbm,    ",selection, "bhnm., ",selectedText)
                 results={results} 
                 sessionId={sessionId}
                 query={currentQuery}
+                isScriptReady={isScriptReady}
+                isScriptLoading={isScriptLoading} 
               />
             </div>
           )}

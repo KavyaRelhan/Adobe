@@ -6,6 +6,7 @@ from pathlib import Path
 load_dotenv()
 
 UPLOAD_DIR = Path("uploads")
+GENERATED_ASSETS_DIR_NAME = "generated"
 RELEVANCE_THRESHOLD = 0.25  # Example value, adjust as needed
 MAX_RESULTS = 10         # Example value, adjust as needed
 

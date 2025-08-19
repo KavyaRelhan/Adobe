@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import  apiService from '../services/api';
 import { FaPlayCircle, FaSpinner, FaCheckCircle } from 'react-icons/fa';
+import "../styles/PodcastGenerator.css"
 
 const API_BASE_URL = 'http://127.0.0.1:8000';
 
 const PodcastGenerator = ({ sessionId, isScriptReady, isScriptLoading }) => {
     const [isAudioLoading, setIsAudioLoading] = useState(false);
     const [audioUrl, setAudioUrl] = useState(null);
+    const [isPlaying, setIsPlaying] = useState(false); 
 
     const handleGenerateAudio = async () => {
         setIsAudioLoading(true);
@@ -42,9 +44,23 @@ const PodcastGenerator = ({ sessionId, isScriptReady, isScriptLoading }) => {
             )}
 
             {audioUrl && (
-                <audio controls autoPlay src={audioUrl} className="audio-player">
-                    Your browser does not support the audio element.
-                </audio>
+                <div className="podcast-player-container">
+                    {/* The new rotating disk visual */}
+                    <div className={`podcast-disk ${isPlaying ? 'is-playing' : ''}`}>
+                        <div className="podcast-disk-inner"></div>
+                    </div>
+                    <audio 
+                        controls 
+                        autoPlay 
+                        src={audioUrl} 
+                        className="audio-player"
+                        onPlay={() => setIsPlaying(true)}
+                        onPause={() => setIsPlaying(false)}
+                        onEnded={() => setIsPlaying(false)}
+                    >
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
             )}
         </div>
     );

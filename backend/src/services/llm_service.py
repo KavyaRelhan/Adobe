@@ -89,19 +89,19 @@ def generate_podcast_script(query: str, insights: dict, sections: list) -> str:
 
     # --- The Prompt for Script Generation ---
     prompt = f"""
-    You are a creative podcast scriptwriter. Your task is to create a short, engaging, and natural-sounding podcast conversation between two hosts, "Alex" and "Ben".
+    You are a creative podcast scriptwriter. Your task is to create a long 2 to 5 minutes, engaging, and natural-sounding podcast conversation between two hosts, "Alex" and "Ben".
 
-    The conversation must be based *only* on the following context. Do not add any external information.
-    The goal is to make the disconnected facts from the context sound like a fluid and insightful discussion.
+    The conversation must be based *only* on the following context. You can add some extra information also, but it should be completely correlated with the context.
+    The goal is to make the disconnected facts from the context sound like a fluid and insightful discussion. But don't mention anything like aI mentions, it's written ,you've given etc phrases.
 
     **Context:**
     {context}
 
     **Instructions:**
-    1.  Create a script that is approximately 2-3 minutes long when spoken.
+    1.  Create a script that is approximately 2-5 minutes long when spoken.
     2.  The tone should be curious and informative.
     3.  The hosts, Alex and Ben, should build on each other's points.
-    4.  The output MUST be only the script, formatted exactly as follows, with each line starting with the speaker's name followed by a colon.
+    4.  The output MUST be only the script, formatted exactly as follows.Initially they may address each other by their names and sometimes in middle of conversation also as it suits.
 
     **Example Format:**
     Alex: Welcome back to "Insightful Reads"! Today, we're diving into some fascinating documents.

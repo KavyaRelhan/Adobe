@@ -5,11 +5,11 @@ from typing import List, Optional
 from .. import models
 from ..services import ml_pipeline_service, llm_service, tts_service
 from ..state import session_stores
-# from ..main import UPLOAD_DIR
 from ..config import UPLOAD_DIR
 from ..services.vector_store import VectorStore
 import os
 import datetime
+
 
 router = APIRouter(prefix="/collection", tags=["Collection Processing"])
 
@@ -29,7 +29,7 @@ async def get_session_files(session_id: str):
         # It's not an error if the directory doesn't exist yet, just means no files.
         return {"uploaded_files": []}
     
-    files = [f.name for f in session_upload_dir.iterdir() if f.is_file()]
+    files = [f.name for f in session_upload_dir.iterdir() if f.is_file() and f.suffix.lower() == '.pdf']
     return {"uploaded_files": files}
 
 
@@ -40,11 +40,15 @@ async def upload_pdf_to_session(session_id: str = Form(...), files: List[UploadF
     session_upload_dir.mkdir(exist_ok=True)
     
     for file in files:
+        if file.content_type != "application/pdf":
+            print(f"Skipping non-PDF file: {file.filename}")
+            continue
+
         file_path = session_upload_dir / file.filename
         with open(file_path, "wb") as buffer:
             buffer.write(await file.read())
         
-    uploaded_files = [f.name for f in session_upload_dir.iterdir() if f.is_file()]
+    uploaded_files = [f.name for f in session_upload_dir.iterdir() if f.is_file() and f.suffix.lower() == '.pdf']
     return {"message": "File uploaded successfully.", "uploaded_files": uploaded_files}
 
 @router.post("/delete-file", summary="Delete a specific file from a session")
@@ -204,17 +208,12 @@ async def get_audio(session_id: str):
     """
     Checks for existing audio, generates it if needed, and returns the URL.
     """
+    print("absnkd")
     session_upload_dir = UPLOAD_DIR / session_id
     script_path = session_upload_dir / "podcast_script.txt"
     audio_path = session_upload_dir / "podcast.mp3"
     audio_url = f"/uploads/{session_id}/podcast.mp3"
 
-    # If the audio file already exists, just return its URL
-    # if audio_path.exists():
-    #     print("Returning existing audio file.")
-    #     return {"podcast_url": audio_url}
-
-    # If the script doesn't exist, something went wrong
     if not script_path.exists():
         raise HTTPException(status_code=404, detail="Podcast script not found. Please generate results first.")
 
@@ -223,6 +222,7 @@ async def get_audio(session_id: str):
         script_text = f.read()
     
     tts_service.script_to_audio(script_text, audio_path)
+    
+    print(audio_url)
 
     return {"podcast_url": audio_url}
-
