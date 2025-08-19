@@ -1,7 +1,8 @@
 import React from 'react';
 import '../styles/ResultsSection.css';
-import PodcastGenerator from "./PodcastGenerator"
+import PodcastGenerator from "./PodcastGenerator";
 
+const API_BASE_URL = 'http://127.0.0.1:8000';     // Add this here too
 
 const ResultsSection = ({ results, sessionId, isScriptReady, isScriptLoading }) => (
     <section className="results-container">
@@ -9,22 +10,35 @@ const ResultsSection = ({ results, sessionId, isScriptReady, isScriptLoading }) 
             <h2>Analysis Results</h2>
         </header>
 
+        {/* Relevant Sections */}
         <div className="relevant-section-wrapper">
             <h3>Most Relevant Sections</h3>
             <div className="relevant-sections-container">
-                {results.relevant_sections.map((section, index) => (
-                    <div key={index} className="section-card glass-card">
-                        <div className="section-card-header">
-                            <span><p title={section.document}>{section.document}</p></span>
-                            <span>Page {section.page_number}</span>
+                {results.relevant_sections.map((section, index) => {
+                    // Build file URL dynamically using backend base and sessionId
+                    const pdfUrl = `${API_BASE_URL}/uploads/${sessionId}/${section.document}`;
+
+                    return (
+                        <div
+                            key={index}
+                            className="section-card glass-card"
+                            onClick={() => window.open(`${pdfUrl}#page=${section.page_number}`, "_blank")}
+                            style={{ cursor: "pointer" }}
+                        >
+                            <div className="section-card-header">
+                                <span>
+                                    <p title={section.document}>{section.document}</p>
+                                </span>
+                                <span>Page {section.page_number}</span>
+                            </div>
+                            <p>{section.refined_text}</p>
                         </div>
-                        {/* <h4>{section.section_title}</h4> */}
-                        <p>{section.refined_text}</p>
-                    </div>
-                ))}
+                    );
+                })}
             </div>
         </div>
 
+        {/* Insights Section */}
         <div className="insights-grid">
             <div className="insights-card glass-card">
                 <h3>Key Insights</h3>
@@ -55,6 +69,7 @@ const ResultsSection = ({ results, sessionId, isScriptReady, isScriptLoading }) 
             </div>
         </div>
 
+        {/* Podcast / audio */}
         <div className="podcast-section">
             <PodcastGenerator
                 sessionId={sessionId}

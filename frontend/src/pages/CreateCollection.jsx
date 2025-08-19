@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import UploadSection from "../components/UploadSection";
 import AnalysisForm from "../components/AnalysisForm";
+import TextSelectionPopup from '../components/TextSelectionPopup';
 import Loader from "../components/Loader";
 import FileList from "../components/FileList";
 import ResultsSection from '../components/ResultsSection';
@@ -219,44 +220,17 @@ console.log("cvnbm,    ",selection, "bhnm., ",selectedText)
           // onTextSelect={setSelection} // Pass the state setter directly
         />
       )}
-      {popupPos && selectedText && (
-        <div
-          style={{
-            position: "fixed",
-            top: popupPos.y,
-            left: popupPos.x,
-            transform: "translate(-50%, -100%)",
-            background: "white",
-            border: "1px solid #ccc",
-            borderRadius: "8px",
-            padding: "6px 10px",
-            boxShadow: "0 2px 6px rgba(0,0,0,0.2)",
-            zIndex: 9999,
-          }}
-        >
-          <p style={{ margin: 0, fontSize: "14px" }}>{selectedText}</p>
-          <button
-            onClick={() => {
-              console.log("Analyze:", selectedText);
-              handleAnalyzeSelectedText(selectedText);
-              setSelectedText("");                     
-              setPopupPos(null);
-              setViewingPdf(null);  
-            }}
-            style={{
-              marginTop: "4px",
-              padding: "4px 8px",
-              background: "#007bff",
-              color: "white",
-              border: "none",
-              borderRadius: "4px",
-              cursor: "pointer",
-            }}
-          >
-            Analyze
-          </button>
-        </div>
-      )}
+      <TextSelectionPopup
+        text={selectedText}
+        position={popupPos}
+        onAnalyze={(text) => {
+          handleAnalyzeSelectedText(text);
+          setSelectedText('');
+          setPopupPos(null);
+          setViewingPdf(null);
+        }}
+      />
+
 
     </>
   );
