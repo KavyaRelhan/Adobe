@@ -58,9 +58,18 @@ npm install
 npm run dev
 ```
 
-## 🐳 Docker Deployment 
+## 🐳 Ruuning through Docker  
 
-You can run the entire app using Docker without installing Python or Node.
+You can run the entire app using Docker without installing Python 
+
+### Run frontend through
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Backend will run through docker image
 
 ```bash
 docker build -t connectdocs-app .
