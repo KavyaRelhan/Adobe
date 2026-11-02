@@ -1,60 +1,80 @@
-# app/services/ml_pipeline_service.py
+# backend/src/services/ml_pipeline_service.py
 
 from pathlib import Path
-from typing import List
+from typing import List, Dict, Any
 
-# ... (keep existing imports) ...
-from ..models import RecommendationData
 from ..utils.pdf_parser import parse_pdf_to_blocks
 from ..utils.document_structurer import structure_document
-from ..utils.relevance_analyzer import relevance_analyzer
 
-def run_analysis_pipeline(
-    pdf_paths: List[Path], 
-    query: str
-) -> RecommendationData:
+
+def process_documents(
+    pdf_paths: List[Path]
+) -> Dict[str, List[Dict[str, Any]]]:
     """
-    Orchestrates the analysis pipeline on a COLLECTION of documents.
+    Extract and structure paragraphs from uploaded PDFs.
+
+    This function is called during upload.
+
+    It does NOT:
+    - Generate embeddings.
+    - Calculate similarity.
+    - Search FAISS.
+    - Depend on a user query.
+
+    The vector store handles embedding generation and indexing.
     """
-    print("--- Starting ML Analysis Pipeline ---")
-    
-    # 1. Parse ALL documents in the collection into a single list of blocks
-    print(f"Step 1: Parsing {len(pdf_paths)} PDF(s)...")
-    all_blocks = []
+
+    processed_documents = {}
+
     for pdf_path in pdf_paths:
-        all_blocks.extend(parse_pdf_to_blocks(str(pdf_path)))
 
-    if not all_blocks:
-        raise ValueError("Could not extract any content from the provided documents.")
+        print(f"Processing uploaded PDF: {pdf_path.name}")
 
-    # 2. Structure the combined document content
-    print("Step 2: Structuring combined document content...")
-    structured_document = structure_document(all_blocks)
-    
-    # 3. Analyze for relevance using the provided persona and job
-    print("Step 3: Analyzing for relevance...")
-    # analyzer = relevance_analyzer()
-    
-    analyzed_sections = relevance_analyzer.analyze(
-        structured_document, 
-        query
-    )
-    
-    # 4. Assemble the final output
-    doc_filenames = [path.name for path in pdf_paths]
-    final_output = RecommendationData(
-        metadata={
-            "input_documents": doc_filenames,
-            "persona": "N/A",
-            "job_to_be_done": query,
-        },
-        # extracted_sections=extracted_sections,
-        # subsection_analysis=subsection_analysis
-        analyzed_sections=analyzed_sections
-    )
-    
-    print("--- ML Analysis Pipeline Finished ---")
-    
-    print(f"DEBUG: About to return object of type: {type(final_output)}")
+        # 1. Extract text blocks from this PDF.
+        blocks = parse_pdf_to_blocks(
+            str(pdf_path)
+        )
 
-    return final_output
+        if not blocks:
+            raise ValueError(
+                f"No readable text could be extracted "
+                f"from {pdf_path.name}."
+            )
+
+        # 2. Structure the extracted blocks.
+        structured_content = structure_document(
+            blocks
+        )
+
+        # 3. Track the latest heading for each paragraph.
+        paragraphs = []
+        current_heading = "General Information"
+
+        for item in structured_content:
+
+            if item["type"] == "heading":
+
+                current_heading = item["text"]
+
+            elif item["type"] == "paragraph":
+
+                text = item["text"].strip()
+
+                if not text:
+                    continue
+
+                paragraphs.append({
+                    "document": pdf_path.name,
+                    "page_number": item.get("page", 0),
+                    "section_title": current_heading,
+                    "refined_text": text
+                })
+
+        processed_documents[pdf_path.name] = paragraphs
+
+        print(
+            f"Extracted {len(paragraphs)} paragraphs "
+            f"from {pdf_path.name}"
+        )
+
+    return processed_documents
