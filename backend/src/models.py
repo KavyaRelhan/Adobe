@@ -44,11 +44,20 @@ class InsightsResponse(BaseModel):
     insights: InsightDetail
 
 class ProcessingResult(BaseModel):
+    relevant_sections: List[AnalyzedSection] = Field(
+        default_factory=list,
+        description="The most relevant paragraphs retrieved from the documents."
+    )
 
-    relevant_sections: List[AnalyzedSection] = Field(..., description="The most important sections identified by the ML model.")
-    insights: InsightDetail = Field(..., description="LLM-generated insights based on the content.")
-    # podcast_url: str = Field(..., description="The URL to the generated audio podcast.")
+    insights: InsightDetail = Field(
+        ...,
+        description="AI-generated insights, or a fallback if generation fails."
+    )
 
+    warnings: List[str] = Field(
+        default_factory=list,
+        description="Warnings about optional features that could not be generated."
+    )
 # class Recommendation(BaseModel):
 #     """Updated response model to include richer context."""
 #     source_chunk_id: int
